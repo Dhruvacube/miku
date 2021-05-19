@@ -1,9 +1,17 @@
-import discord
-from discord.ext import commands
 import os
-import dotenv
+import time
+from os.path import join
+from pathlib import Path
+
+import discord
 import DiscordUtils
+import dotenv
 import sentry_sdk
+from discord.ext import commands
+from pretty_help import PrettyHelp
+
+from util import post_stats_log as posting
+
 
 def get_prefix(bot, message):
     """A callable Prefix for our bot. This could be edited to allow per server prefixes."""
@@ -39,7 +47,33 @@ bot = commands.Bot(
     case_insensitive=True,
     description="Hi I am **Hatsune Miku**"
 )
+bot.statcord = token_get('STATCORD')
+bot.discord_id = token_get('DISCORD_CLIENT_ID')
 bot.music = DiscordUtils.Music()
+
+@bot.event
+async def on_ready():
+    cog_dir = Path(__file__).resolve(strict=True).parent / join('cogs')
+    for filename in os.listdir(cog_dir):
+        if os.path.isdir(cog_dir / filename):
+            for i in os.listdir(cog_dir / filename):
+                if i.endswith('.py'):
+                    bot.load_extension(f'cogs.{filename.strip(" ")}.{i[:-3]}')
+        else:
+            if filename.endswith('.py'):
+                if filename != 'music1.py':
+                    bot.load_extension(f'cogs.{filename[:-3]}')
+
+    current_time = time.time()
+    difference = int(round(current_time - bot.start_time))
+    stats = bot.get_channel(844534399500419092)
+    e = discord.Embed(title=f"Bot Loaded!", description=f"Bot ready by **{time.ctime()}**, loaded all cogs perfectly! Time to load is {difference} secs :)")
+    e.set_thumbnail(url=bot.user.avatar_url)
+    print('Started The Bot')
+
+    await posting.post_guild_stats_all()
+    await stats.send(embed=e)
+    await bot.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name='over Miku Expo'))
 
 #Sentry Init
 sentry_sdk.init(
@@ -50,3 +84,10 @@ try:
     division_by_zero = 1 / 0
 except:
     pass
+
+try:
+    bot.run(token_get('TOKEN'))
+except RuntimeError:
+    bot.logout()
+except KeyboardInterrupt:
+    bot.logout()

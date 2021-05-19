@@ -1,9 +1,19 @@
-from discord.ext import commands
 import discord
+import DiscordUtils
+from discord.ext import commands
+
 
 class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+    
+    def songembed(self, song):
+        e=discord.Embed(color=discord.Color.random())
+        e.set_thumbnail(song.thumbnail)
+        e.title = song.title
+        e.add_field(name=f'**{song.channel}**',value=f'[Click Here]({song.channel_url})')
+        e.add_field(name=f'**{song.name}**',value=f'[Click Here]({song.url})')
+        return e
 
     @commands.command()
     async def join(self,ctx):
@@ -72,8 +82,17 @@ class Music(commands.Cog):
 
     @commands.command()
     async def queue(self,ctx):
+        '''Displays the songs queue'''
+        paginator = DiscordUtils.Pagination.AutoEmbedPaginator(ctx)
         player = self.bot.music.get_player(guild_id=ctx.guild.id)
-        await ctx.send(f"{', '.join([song.name for song in player.current_queue()])}")
+        paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
+        paginator.add_reaction('⏮️', "first")
+        paginator.add_reaction('⏪', "back")
+        paginator.add_reaction('🔐', "lock")
+        paginator.add_reaction('⏩', "next")
+        paginator.add_reaction('⏭️', "last")
+        embeds = [self.songembed(song) for song in player.current_queue()]
+        await paginator.run(embeds)
 
     @commands.command()
     async def np(self,ctx):
@@ -110,3 +129,6 @@ class Music(commands.Cog):
         player = self.bot.music.get_player(guild_id=ctx.guild.id)
         song = await player.remove_from_queue(int(index))
         await ctx.send(f"Removed {song.name} from queue")
+
+def setup(bot):
+    bot.add_cog(Music(bot))

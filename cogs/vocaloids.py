@@ -1,7 +1,11 @@
+from os.path import join
+from pathlib import Path
+from random import choice
+
 import discord
 import requests
 from discord.ext import commands
-from random import choice
+
 
 class Vocaloid(commands.Cog):
     def __init__(self, bot):
@@ -10,12 +14,21 @@ class Vocaloid(commands.Cog):
         self.description = 'Get some kawai pictures of the vocaloids.'
     
     async def meek_api(self,ctx, name):
-        l = choice([self.endpoint, 'https://mikuapi.predeactor.net/random']) if name.lower() == 'miku' else self.endpoint
+        l = choice([self.endpoint, 'https://mikuapi.predeactor.net/random'],False) if name.lower() == 'miku' else self.endpoint
         e=discord.Embed(title=name.capitalize(),color=discord.Color.random())
         try:
             data = requests.get(url = l + name).json()['url']
             e.set_image(url=data)
-        except: pass
+        except:
+            imageslistdir = Path(__file__).resolve(
+                strict=True).parent / join('util','images_list.txt')
+            filepointer = open(imageslistdir)
+            imageslist = filepointer.readlines()
+            if name == 'miku':
+                e.set_image(url=choice(imageslist))
+            else:
+                e=discord.Embed(title='Sorry but currently there is some problem!',color=discord.Color.red())
+                e.set_image(url=choice(imageslist))
         return e
 
     @commands.command()
