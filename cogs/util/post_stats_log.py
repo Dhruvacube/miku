@@ -12,10 +12,11 @@ class PostStats:
         self.bot = bot
 
     async def post_guild_stats_all(self):
+        '''
         guildsno = len(self.bot.guilds)+1
         members = len(set(self.bot.get_all_members()))
         imageslistdir = Path(__file__).resolve(
-            strict=True).parent / join('util','images_list.txt')
+            strict=True).parent / join('images_list.txt')
         filepointer = open(imageslistdir)
         imageslist = filepointer.readlines()
 
@@ -88,3 +89,4 @@ class PostStats:
         e1.add_field(name='BladeBotList', value=str(
             k.status_code)+f' : [BladeBotList](https://bladebotlist.xyz/bot/{self.bot.discord_id}/)')
         await r.send(embed=e1)
+        '''

@@ -14,7 +14,7 @@ class Vocaloid(commands.Cog):
         self.description = 'Get some kawai pictures of the vocaloids.'
     
     async def meek_api(self,ctx, name):
-        l = choice([self.endpoint, 'https://mikuapi.predeactor.net/random'],False) if name.lower() == 'miku' else self.endpoint
+        l = choice([self.endpoint, 'https://mikuapi.predeactor.net/random',False]) if name.lower() == 'miku' else self.endpoint
         e=discord.Embed(title=name.capitalize(),color=discord.Color.random())
         try:
             data = requests.get(url = l + name).json()['url']

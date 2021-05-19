@@ -10,7 +10,7 @@ import sentry_sdk
 from discord.ext import commands
 from pretty_help import PrettyHelp
 
-from util import post_stats_log as posting
+from cogs.util import post_stats_log as posting
 
 
 def get_prefix(bot, message):
@@ -49,19 +49,21 @@ bot = commands.Bot(
 )
 bot.statcord = token_get('STATCORD')
 bot.discord_id = token_get('DISCORD_CLIENT_ID')
+bot.start_time = time.time()
 bot.music = DiscordUtils.Music()
 
 @bot.event
 async def on_ready():
     cog_dir = Path(__file__).resolve(strict=True).parent / join('cogs')
     for filename in os.listdir(cog_dir):
-        if os.path.isdir(cog_dir / filename):
-            for i in os.listdir(cog_dir / filename):
-                if i.endswith('.py'):
-                    bot.load_extension(f'cogs.{filename.strip(" ")}.{i[:-3]}')
+        if filename != 'util':
+            if os.path.isdir(cog_dir / filename):
+                for i in os.listdir(cog_dir / filename):
+                    if i.endswith('.py'):
+                        bot.load_extension(f'cogs.{filename.strip(" ")}.{i[:-3]}')
         else:
             if filename.endswith('.py'):
-                if filename != 'music1.py':
+                if filename != '__init__.py':
                     bot.load_extension(f'cogs.{filename[:-3]}')
 
     current_time = time.time()
@@ -71,7 +73,7 @@ async def on_ready():
     e.set_thumbnail(url=bot.user.avatar_url)
     print('Started The Bot')
 
-    await posting.post_guild_stats_all()
+    await posting.PostStats(bot).post_guild_stats_all()
     await stats.send(embed=e)
     await bot.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name='over Miku Expo'))
 

@@ -1,14 +1,11 @@
 import discord
 from discord.ext import commands
-# from ..post_stats_log import PostStats
-
+from .util import post_stats_log
 
 class BotEvents(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.minato_gif = bot.minato_gif
-        self.minato_dir = bot.minato_dir
-        # self.posting = PostStats(self.bot)
+        self.posting = post_stats_log.PostStats(self.bot)
     
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
@@ -38,7 +35,7 @@ class BotEvents(commands.Cog):
         e34.add_field(name="**Server ID**", value=guild.id, inline=True)
         await c.send(embed=e34)
         await c.send(f'We are now currently at **{len(self.bot.guilds)+1} servers**')
-        # await self.posting.post_guild_stats_all()
+        await self.posting.post_guild_stats_all()
 
     #when bot leaves the server
     @commands.Cog.listener()
@@ -55,7 +52,7 @@ class BotEvents(commands.Cog):
         e34.add_field(name="**Server ID**", value=guild.id, inline=True)
         await c.send(embed=e34)
         await c.send(f'We are now currently at **{len(self.bot.guilds)+1} servers**')
-        # await self.posting.post_guild_stats_all()
+        await self.posting.post_guild_stats_all()
 
     #on message event
     @commands.Cog.listener()
