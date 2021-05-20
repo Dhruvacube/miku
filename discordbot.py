@@ -16,7 +16,7 @@ from cogs.util import post_stats_log as posting
 def get_prefix(bot, message):
     """A callable Prefix for our bot. This could be edited to allow per server prefixes."""
 
-    prefixes = ['*', 'm$', 'miku ', 'miku', '&']
+    prefixes = ['*', 'm$', 'miku ', 'miku', '&', 'm&']
 
     if not message.guild:
         return 'm!'
@@ -56,15 +56,13 @@ bot.music = DiscordUtils.Music()
 async def on_ready():
     cog_dir = Path(__file__).resolve(strict=True).parent / join('cogs')
     for filename in os.listdir(cog_dir):
-        if filename != 'util':
-            if os.path.isdir(cog_dir / filename):
-                for i in os.listdir(cog_dir / filename):
-                    if i.endswith('.py'):
-                        bot.load_extension(f'cogs.{filename.strip(" ")}.{i[:-3]}')
+        if os.path.isdir(cog_dir / filename) and filename != 'util':
+            for i in os.listdir(cog_dir / filename):
+                if i.endswith('.py'):
+                    bot.load_extension(f'cogs.{filename.strip(" ")}.{i[:-3]}')
         else:
             if filename.endswith('.py'):
-                if filename != '__init__.py':
-                    bot.load_extension(f'cogs.{filename[:-3]}')
+                bot.load_extension(f'cogs.{filename[:-3]}')
 
     current_time = time.time()
     difference = int(round(current_time - bot.start_time))

@@ -6,6 +6,7 @@ from discord.ext import commands
 class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.description = 'Listen to some soothing music!'
     
     def songembed(self, song):
         e=discord.Embed(color=discord.Color.random())
