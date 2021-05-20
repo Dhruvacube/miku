@@ -9,6 +9,7 @@ import dotenv
 import sentry_sdk
 from discord.ext import commands
 from pretty_help import PrettyHelp
+from discord_slash import SlashCommand
 
 from cogs.util import post_stats_log as posting
 
@@ -51,6 +52,7 @@ bot.statcord = token_get('STATCORD')
 bot.discord_id = token_get('DISCORD_CLIENT_ID')
 bot.start_time = time.time()
 bot.music = DiscordUtils.Music()
+slash = SlashCommand(bot, override_type = True,sync_commands=True)
 
 @bot.event
 async def on_ready():
@@ -74,7 +76,7 @@ async def on_ready():
     await posting.PostStats(bot).post_guild_stats_all()
     await stats.send(embed=e)
     await bot.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name='over Miku Expo'))
-
+    
 #Sentry Init
 sentry_sdk.init(
     SENTRY_LINK,
