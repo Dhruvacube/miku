@@ -13,7 +13,7 @@ Here are some questions which the bot will answer -
 
 #### Features 
 
-Category | Commands
+Category     | Commands
 ------------ | -------------
-Vocaloid | Content from cell 2
-Music | Content in the second column
+Vocaloid     | Content from cell 2
+Music        | Content in the second column
