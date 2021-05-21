@@ -9,9 +9,10 @@ import dotenv
 import sentry_sdk
 from discord.ext import commands
 from pretty_help import PrettyHelp
-from discord_slash import SlashCommand
+from discord_slash import SlashCommand, SlashContext
 
 from cogs.util import post_stats_log as posting
+from cogs.util import meek_moe
 
 
 def get_prefix(bot, message):
@@ -52,7 +53,8 @@ bot.statcord = token_get('STATCORD')
 bot.discord_id = token_get('DISCORD_CLIENT_ID')
 bot.start_time = time.time()
 bot.music = DiscordUtils.Music()
-slash = SlashCommand(bot, override_type = True,sync_commands=True)
+bot.token = token_get('TOKEN')
+slash = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)
 
 @bot.event
 async def on_ready():
@@ -76,7 +78,102 @@ async def on_ready():
     await posting.PostStats(bot).post_guild_stats_all()
     await stats.send(embed=e)
     await bot.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name='over Miku Expo'))
+
+
+# Vocaloids Slash Commands
+@slash.slash(name="rin",description='Rin kawai picture')
+async def rin(ctx: SlashContext):
+    '''Rin kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'rin'))
+        
+@slash.slash(name="una",description='Una kawai picture')
+async def una(ctx: SlashContext):
+    '''Una kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'una'))
     
+@slash.slash(name="gumi",description='Gumi kawai picture')
+async def gumi(ctx: SlashContext):
+    '''Gumi kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'gumi'))
+    
+@slash.slash(name="ia",description='Ia kawai picture')
+async def ia(ctx: SlashContext):
+    '''Ia kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'ia'))
+    
+@slash.slash(name="luka",description='Luka kawai picture')
+async def luka(ctx: SlashContext):
+    '''Luka kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'luka'))
+    
+@slash.slash(name="fukase",description='Fukase kawai picture')
+async def fukase(ctx: SlashContext):
+    '''Fukase kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'fukase'))
+    
+@slash.slash(name="miku",description='Hatsune Miku kawai picture')
+async def miku(ctx: SlashContext):
+    '''Hatsune Miku kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'miku'))
+    
+@slash.slash(name="len",description='Len kawai picture')
+async def _len(ctx: SlashContext):
+    '''Len kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'len'))
+    
+@slash.slash(name="kaito",description='Kaito kawai picture')
+async def kaito(ctx: SlashContext):
+    '''Kaito kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'kaito'))
+    
+@slash.slash(name="teto",description='Teto kawai picture')
+async def teto(ctx: SlashContext):
+    '''Teto kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'teto'))
+    
+@slash.slash(name="meiko",description='Meiko kawai picture')
+async def meiko(ctx: SlashContext):
+    '''Meiko kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'meiko'))
+    
+@slash.slash(name="yukari",description='Yukari kawai picture')
+async def yukari(ctx: SlashContext):
+    '''Yukari kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'yukari'))
+    
+@slash.slash(name="miki",description='Miki kawai picture')
+async def miki(ctx: SlashContext):
+    '''Miki kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'miki'))
+    
+@slash.slash(name="lily",description='Lily kawai picture')
+async def lily(ctx: SlashContext):
+    '''Lily kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'lily'))
+        
+@slash.slash(name="mayu",description='Mayu kawai picture')
+async def mayu(ctx: SlashContext):
+    '''Mayu kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'mayu'))
+
+@slash.slash(name="aoki",description='Aoki kawai picture')
+async def aoki(ctx: SlashContext):
+    '''Aoki kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'aoki'))
+        
+@slash.slash(name="zola",description='Zola kawai picture')
+async def zola(ctx: SlashContext):
+    '''Zola kawai picture'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'zola'))
+    
+@slash.slash(name="diva",description='Random picturs from Project Diva')
+async def diva(ctx: SlashContext):
+    '''Random picturs from Project Diva'''
+    await ctx.send(embed = await meek_moe.meek_api(ctx,'diva'))
+    
+
+
+
 #Sentry Init
 sentry_sdk.init(
     SENTRY_LINK,
@@ -87,8 +184,10 @@ try:
 except:
     pass
 
+
+
 try:
-    bot.run(token_get('TOKEN'))
+    bot.run(bot.token)
 except RuntimeError:
     bot.logout()
 except KeyboardInterrupt:
