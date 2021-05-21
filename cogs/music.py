@@ -10,7 +10,8 @@ class Music(commands.Cog):
     
     def songembed(self, song):
         e=discord.Embed(color=discord.Color.random())
-        e.set_thumbnail(song.thumbnail)
+        e.set_thumbnail(url=song.thumbnail)
+        e.set_image(url=song.thumbnail)
         e.title = song.title
         e.add_field(name=f'**{song.channel}**',value=f'[Click Here]({song.channel_url})')
         e.add_field(name=f'**{song.name}**',value=f'[Click Here]({song.url})')
@@ -38,16 +39,18 @@ class Music(commands.Cog):
         if not ctx.voice_client.is_playing():
             await player.queue(url, search=True)
             song = await player.play()
-            e.set_thumbnail(song.thumbnail)
+            e.set_thumbnail(url=song.thumbnail)
             e.title = 'Playing - '+song.title
             e.add_field(name=f'**{song.channel}**',value=f'[Click Here]({song.channel_url})')
             e.add_field(name=f'**{song.name}**',value=f'[Click Here]({song.url})')
+            e.set_image(url=song.thumbnail)
         else:
             song = await player.queue(url, search=True)
-            e.set_thumbnail(song.thumbnail)
+            e.set_thumbnail(url=song.thumbnail)
             e.title = 'Queued - '+song.title
             e.add_field(name=f'**{song.channel}**',value=f'[Click Here]({song.channel_url})')
             e.add_field(name=f'**{song.name}**',value=f'[Click Here]({song.url})')
+            e.set_image(url=song.thumbnail)
         await ctx.send(embed=e)
 
     @commands.command()
@@ -101,10 +104,11 @@ class Music(commands.Cog):
         e=discord.Embed(color=discord.Color.random())
         player = self.bot.music.get_player(guild_id=ctx.guild.id)
         song = player.now_playing()
-        e.set_thumbnail(song.thumbnail)
+        e.set_thumbnail(url=song.thumbnail)
         e.title = 'Playing - '+song.title
         e.add_field(name=f'**{song.channel}**',value=f'[Click Here]({song.channel_url})')
         e.add_field(name=f'**{song.name}**',value=f'[Click Here]({song.url})')
+        e.set_image(url=song.thumbnail)
         await ctx.send(embed=e)
 
     @commands.command()
