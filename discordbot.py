@@ -10,6 +10,7 @@ import sentry_sdk
 from discord.ext import commands
 from pretty_help import PrettyHelp
 from discord_slash import SlashCommand, SlashContext
+from asyncdagpi import Client
 
 from cogs.util import post_stats_log as posting
 from cogs.util import meek_moe
@@ -54,6 +55,7 @@ bot.discord_id = token_get('DISCORD_CLIENT_ID')
 bot.start_time = time.time()
 bot.music = DiscordUtils.Music()
 bot.token = token_get('TOKEN')
+bot.dagpi = Client(token_get('DAGPI'))
 slash = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)
 
 @bot.event
