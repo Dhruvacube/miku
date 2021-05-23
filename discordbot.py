@@ -19,10 +19,12 @@ from cogs.util import meek_moe
 def get_prefix(bot, message):
     """A callable Prefix for our bot. This could be edited to allow per server prefixes."""
 
-    prefixes = ['*', 'm$', 'miku ', 'miku', '&', 'm&']
+    prefixes = ['m$', 'miku ', 'miku', '&', 'm&']
 
     if not message.guild:
         return 'm!'
+    if message.guild.id == 747480356625711204:
+        prefixes + ['*']
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
