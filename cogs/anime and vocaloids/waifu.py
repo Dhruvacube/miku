@@ -6,9 +6,11 @@ class Waifu(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.dagpi = bot.dagpi
+        self.description = 'Get waifu ! UwU'
     
     @commands.command()
     async def waifu(self, ctx):
+        '''Get wqaifu and marry them! UwU!'''
         waifu = await self.bot.dagpi.waifu() 
         pic = waifu['display_picture']
         name = waifu['name']

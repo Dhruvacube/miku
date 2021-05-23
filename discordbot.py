@@ -24,7 +24,7 @@ def get_prefix(bot, message):
     if not message.guild:
         return 'm!'
     if message.guild.id == 747480356625711204:
-        prefixes + ['*']
+        return prefixes + ['*']
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
