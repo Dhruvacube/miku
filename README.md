@@ -19,7 +19,7 @@ __Category__ !| __Description__
 **Music**    | Listen to some **Music**
 **Waifu**    | Rollout random **waifu** and marry them ! 💍 UwU 💖
 
-#### Prefix
+#### ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png) Prefix ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png)
 
 - ___**Guilds**___ : **m$**, **miku**, **&**, **m&**
 - ___**Dm**___ : **m!**
