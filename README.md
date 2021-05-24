@@ -18,3 +18,8 @@ __Category__ | __Commands__
 **Vocaloid** | Get **kawaii** pic of different **Vocaloids**
 **Music**    | Listen to some **Music**
 **Waifu**.   | Rollout random **waifu** and marry them ! 💍 UwU 💖
+
+#### Prefix
+
+- Guilds :
+- Dm : m!
