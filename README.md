@@ -28,3 +28,5 @@ __Category__ !| __Description__
 
 - [Invite Link]()
 - [Website](https://hatsunemikubot.weebly.com/)
+
+![Hatsune Miku](https://i.imgur.com/x0zBdqo.jpg)
