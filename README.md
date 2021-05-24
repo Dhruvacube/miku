@@ -24,4 +24,7 @@ __Category__ !| __Description__
 - ___**Guilds**___ : **m$**, **miku**, **&**, **m&**
 - ___**Dm**___ : **m!**
 
-#### ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png) Prefix ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png)
+#### ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png) Important Links ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png)
+
+- [Invite Link]()
+- [Website](https://hatsunemikubot.weebly.com/)
