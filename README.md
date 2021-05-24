@@ -21,5 +21,5 @@ __Category__ | __Commands__
 
 #### Prefix
 
-- __**Guilds**__ : **m$**, **miku**, **&**, **m&**
+- ___**Guilds**___ : **m$**, **miku**, **&**, **m&**
 - __**Dm**__ : **m!**
