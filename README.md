@@ -11,9 +11,9 @@ Here are some questions which the bot will answer -
 * Also want a bot which has __*waifu commands*__ with __marriage__ options?
 
 
-#### Features 
+#### ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png) Features ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png)
 
-![Hatsune Miku](https://i.imgur.com/nyZ0V3u.png) __Category__ ![Hatsune Miku](https://i.imgur.com/nyZ0V3u.png) | ![Hatsune Miku](https://i.imgur.com/nyZ0V3u.png) __Commands__ ![Hatsune Miku](https://i.imgur.com/nyZ0V3u.png)
+__Category__ !| __Description__
 ------------ | -------------
 **Vocaloid** | Get **kawaii** pic of different **Vocaloids**
 **Music**    | Listen to some **Music**
