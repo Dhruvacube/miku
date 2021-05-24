@@ -42,7 +42,7 @@ class Waifu(commands.Cog):
             pass
     
     @cog_ext.cog_slash(name="waifu", description='Get random waifu and marry them! UwU!')
-    async def waifu_slash(self, ctx: SlashContext):
+    async def _waifu(self, ctx: SlashContext):
         '''Get random waifu and marry them! UwU!'''
         waifu = await self.get_waifu()
         message = await ctx.send(embed = waifu[0])
