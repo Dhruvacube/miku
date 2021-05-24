@@ -13,7 +13,8 @@ Here are some questions which the bot will answer -
 
 #### Features 
 
-Category     | Commands
+__Category__ | __Commands__
 ------------ | -------------
-Vocaloid     | Content from cell 2
-Music        | Content in the second column
+**Vocaloid** | Get **kawaii** pic of different **Vocaloids**
+**Music**    | Listen to some **Music**
+**Waifu**.   | Rollout random **waifu** and marry them ! 💍 UwU 💖
