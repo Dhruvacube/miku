@@ -3,7 +3,7 @@
  Hi I am **Hatsune Miku**. 
 こんにちは、**初音ミクです。** 
 
-![Hatsune Miku](https://i.imgur.com/2m1mLXo.jpg)
+![Hatsune Miku](https://i.imgur.com/Azy60X6.jpg)
 
 Here are some questions which the bot will answer -
 * Want a **Vocaloid** bot? 
