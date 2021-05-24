@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
+
 from .util import post_stats_log
+
 
 class BotEvents(commands.Cog):
     def __init__(self, bot):

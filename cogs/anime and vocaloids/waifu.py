@@ -1,7 +1,9 @@
-from discord.ext import commands
-import discord
 import asyncio
-from discord_slash import cog_ext, SlashContext
+
+import discord
+from discord.ext import commands
+from discord_slash import SlashContext, cog_ext
+
 
 class Waifu(commands.Cog):
     def __init__(self, bot):
@@ -26,6 +28,7 @@ class Waifu(commands.Cog):
         return e,name
     
     @commands.command(aliases=['w','wfu','wa'])
+    @commands.cooldown(1, 2, commands.BucketType.guild)
     async def waifu(self, ctx):
         '''Get random waifu and marry them! UwU!'''
         waifu = await self.get_waifu()

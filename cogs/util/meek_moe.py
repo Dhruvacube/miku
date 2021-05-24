@@ -1,8 +1,10 @@
-import discord
+from os.path import join
 from pathlib import Path
 from random import choice
+
+import discord
 import requests
-from os.path import join
+
 
 async def meek_api(ctx, name):
     l = choice(['https://api.meek.moe/', 'https://mikuapi.predeactor.net/random',False]) if name.lower() == 'miku' else 'https://api.meek.moe/'
