@@ -13,7 +13,7 @@ Here are some questions which the bot will answer -
 
 #### Features 
 
-__Category__ | __Commands__
+![Hatsune Miku](https://i.imgur.com/nyZ0V3u.png) __Category__ ![Hatsune Miku](https://i.imgur.com/nyZ0V3u.png) | ![Hatsune Miku](https://i.imgur.com/nyZ0V3u.png) __Commands__ ![Hatsune Miku](https://i.imgur.com/nyZ0V3u.png)
 ------------ | -------------
 **Vocaloid** | Get **kawaii** pic of different **Vocaloids**
 **Music**    | Listen to some **Music**
