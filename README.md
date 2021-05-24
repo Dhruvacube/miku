@@ -14,7 +14,7 @@ Here are some questions which the bot will answer -
 #### ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png) Features ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png)
 
 __Category__ !| __Description__ | __Slash Commands Availability__
------------- | -----------------------------------------------------
+------------ | -----------------|---------------------------------
 **Vocaloid** | Get **kawaii** pic of different **Vocaloids** | :white_check_mark:
 **Music**    | Listen to some **Music** | :x:
 **Waifu**    | Rollout random **waifu** and marry them ! 💍 UwU 💖 | :white_check_mark:
