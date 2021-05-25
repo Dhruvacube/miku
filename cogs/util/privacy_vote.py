@@ -9,7 +9,7 @@ class VotingMenu(menus.Menu):
     def __init__(self, bot):
         super().__init__()
         self.bot = bot
-        self.bot.owner = bot.owner
+        self.bot.owner = "[DHRUVA SHAW#0550](https://discord.com/users/571889108046184449/)"
 
     async def send_initial_message(self, ctx, channel):
         e = discord.Embed(title="I see you want vote!",
@@ -28,9 +28,10 @@ class VotingMenu(menus.Menu):
         fateslist = f'\n - **[Fates List](https://fateslist.xyz/bot/{self.botdiscord_id}/vote)**'
         voidbots = f'\n - **[Void Bots](https://voidbots.net/bot/{self.botdiscord_id}/vote)**'
         bladebotlist = f'\n - **[BladeBotList](https://bladebotlist.xyz/bot/{self.botdiscord_id}/vote)**'
+        disbot = f'\n - **[DisBot List](https://disbotlist.xyz/bot/{self.botdiscord_id}/vote)**'
         
         e1 = discord.Embed(title="Thanks!",
-            description=f"Thanks {self.ctx.author.mention}! Here's the links:{topgg}{Discordbotlist}{Discordlist}{BotsForDiscord}{Boats}{Space}{fateslist}{voidbots}{bladebotlist}",
+            description=f"Thanks {self.ctx.author.mention}! Here's the links:{topgg}{Discordbotlist}{Discordlist}{BotsForDiscord}{Boats}{Space}{fateslist}{voidbots}{bladebotlist}{disbot}",
             color=discord.Color.random()
         )
         await self.message.edit(content="", embed=e1)

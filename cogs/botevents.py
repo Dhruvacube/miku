@@ -1,3 +1,8 @@
+import datetime
+import os
+import random
+from pathlib import Path
+
 import discord
 from discord.ext import commands
 
@@ -8,24 +13,36 @@ class BotEvents(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.posting = post_stats_log.PostStats(self.bot)
+        self.base_dir = Path(__file__).resolve().parent
     
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
-        '''
         try:
-            img=random.choice(self.minato_gif)
-            file = discord.File(join(self.minato_dir, 'minato',img), filename=img)
-            await guild.system_channel.send('https://i.imgur.com/j6j7ob7.mp4')
-            f=open(Path(__file__).resolve(strict=True).parent.parent.parent / join('welcome_message.txt'),'r')
-            f1=f.read()
-            await guild.system_channel.send(f1.format(guild.name, self.bot.user.mention, self.bot.user.mention, self.bot.user.mention, guild.owner.mention))
-            img=random.choice(self.minato_gif)
-            file = discord.File(join(self.minato_dir, 'minato',img), filename=img)
-            await guild.system_channel.send(file=file)
+            message = 'The prefix is **m$** ,A full list of all commands is available by typing ```m$help```'
+            e = discord.Embed(
+                color=discord.colour.random(),
+                title=self.bot.description,
+                description = message,
+                timestamp = datetime.datetime.utcnow()
+            )
+            e.set_image(
+                url=random.choice(
+                    open(
+                        self.base_dir / os.path.join('util','images_list.txt'), 'r'
+                        ).readlines()
+                    )
+                )
+            e.set_thumbnail(url=self.bot.user.avatar_url)
+            e.set_author(name='Hatsune Miku',url=self.bot.website)
+            await guild.system_channel.send(embed=e)
         except: pass
-        '''
 
-        e34= discord.Embed(title=f'{guild.name}', color= 0x2ecc71,description='Added')
+        e34= discord.Embed(
+            title=f'{guild.name}', 
+            color= discord.Color.green(),
+            description='Added',
+            timestamp = datetime.datetime.utcnow()
+        )
         if guild.icon:
             e34.set_thumbnail(url=guild.icon_url)
         if guild.banner:
@@ -36,13 +53,18 @@ class BotEvents(commands.Cog):
         e34.add_field(name="**Region**", value=str(guild.region).capitalize(), inline=True)
         e34.add_field(name="**Server ID**", value=guild.id, inline=True)
         await c.send(embed=e34)
-        await c.send(f'We are now currently at **{len(self.bot.guilds)+1} servers**')
+        await c.send(f'We are now currently at **{len(self.bot.guilds)} servers**')
         await self.posting.post_guild_stats_all()
 
     #when bot leaves the server
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
-        e34= discord.Embed(title=f'{guild.name}', color= 0xe74c3c,description='Left')
+        e34= discord.Embed(
+            title=f'{guild.name}', 
+            color=discord.Color.red(),
+            description='Left',
+            timestamp = datetime.datetime.utcnow()
+        )
         if guild.icon:
             e34.set_thumbnail(url=guild.icon_url)
         if guild.banner:
@@ -53,7 +75,7 @@ class BotEvents(commands.Cog):
         e34.add_field(name="**Region**", value=str(guild.region).capitalize(), inline=True)
         e34.add_field(name="**Server ID**", value=guild.id, inline=True)
         await c.send(embed=e34)
-        await c.send(f'We are now currently at **{len(self.bot.guilds)+1} servers**')
+        await c.send(f'We are now currently at **{len(self.bot.guilds)} servers**')
         await self.posting.post_guild_stats_all()
 
     #on message event
@@ -67,34 +89,40 @@ class BotEvents(commands.Cog):
     async def on_command_error(self,ctx, error):
         guild = ctx.guild
         if isinstance(error, commands.CommandOnCooldown):
-            e1 = discord.Embed(title="Command Error!", description=f"`{error}`")
+            e1 = discord.Embed(title="Command Error!", description=f"`{error}`", color=discord.Color.random())
             e1.set_footer(text=f"{ctx.author.name}")
             await ctx.channel.send(embed=e1, delete_after=3)
         elif isinstance(error, commands.MissingPermissions):
-            e3 = discord.Embed(title="Command Error!", description=f"`{error}`")
+            e3 = discord.Embed(title="Command Error!", description=f"`{error}`", color=discord.Color.random())
             e3.set_footer(text=f"{ctx.author.name}")
             await ctx.send(embed=e3, delete_after=3)
         elif isinstance(error, commands.MissingRequiredArgument):
-            e4 = discord.Embed(title="Command Error!", description=f"`{error}`")
+            e4 = discord.Embed(title="Command Error!", description=f"`{error}`", color=discord.Color.random())
             e4.set_footer(text=f"{ctx.author.name}")
             await ctx.channel.send(embed=e4, delete_after=2)
         elif isinstance(error, commands.CommandNotFound):
-            e2 = discord.Embed(title="Command Error!", description=f"`{error}`")
+            e2 = discord.Embed(title="Command Error!", description=f"`{error}`", color=discord.Color.random())
             e2.set_footer(text=f"{ctx.author.name}")
             await ctx.channel.send(embed=e2, delete_after=3)
 
         elif isinstance(error, commands.CommandInvokeError): 
-            e7 = discord.Embed(title="Oh no, I guess I have not been given proper access! Or some internal error", description=f"`{error}`")
+            e7 = discord.Embed(title="Oh no, I guess I have not been given proper access! Or some internal error", description=f"`{error}`", color=discord.Color.random())
             e7.add_field(name="Command Error Caused By:", value=f"{ctx.command}")
             e7.add_field(name="By", value=f"{ctx.author.name}")
-            e7.set_thumbnail(url=f"https://i.imgur.com/p8fLFQ4.jpg")
+            e7.set_thumbnail(
+                url=random.choice(
+                    open(
+                        self.base_dir / os.path.join('util','images_list.txt'), 'r'
+                        ).readlines()
+                    )
+                )
             e7.set_footer(text=f"{ctx.author.name}")
             await ctx.channel.send(embed=e7, delete_after=5)
         else:
             c = self.bot.get_channel(844539081979592724)
             
             haaha = ctx.author.avatar_url
-            e9 = discord.Embed(title="Oh no there was some error", description=f"`{error}`")
+            e9 = discord.Embed(title="Oh no there was some error", description=f"`{error}`", color=discord.Color.random())
             e9.add_field(name="**Command Error Caused By**", value=f"{ctx.command}")
             e9.add_field(name="**By**", value=f"**ID** : {ctx.author.id}, **Name** : {ctx.author.name}")
             e9.set_thumbnail(url=f"{haaha}")
@@ -103,7 +131,7 @@ class BotEvents(commands.Cog):
             await c.send(embed=e9)
             
             await ctx.send('**Sending the error report info to my developer**', delete_after=2)
-            e = discord.Embed(title=f'In **{ctx.guild.name}**',description=f'User affected {ctx.message.author}' , color= 0x2ecc71)
+            e = discord.Embed(title=f'In **{ctx.guild.name}**',description=f'User affected {ctx.message.author}' , color= discord.Color.red())
             if ctx.guild.icon:
                 e.set_thumbnail(url=ctx.guild.icon_url)
             if ctx.guild.banner:

@@ -33,7 +33,10 @@ def token_get(tokenname):
         dotenv.load_dotenv(dotenv_file)
     return os.environ.get(tokenname, 'False').strip('\n')
 
-intents = discord.Intents.default()
+intents = discord.Intents.all()
+intents.reactions = True
+intents.guilds = True
+intents.presences = False
 SENTRY_LINK = token_get('SENTRY_LINK')
 
 #Bot Init
@@ -49,14 +52,30 @@ bot = commands.Bot(
     ),
     
     case_insensitive=True,
-    description="Hi I am **Hatsune Miku**"
+    description="Hi I am Hatsune Miku. こんにちは、初音ミクです。"
 )
 bot.statcord = token_get('STATCORD')
 bot.discord_id = token_get('DISCORD_CLIENT_ID')
 bot.start_time = time.time()
 bot.music = DiscordUtils.Music()
+
 bot.token = token_get('TOKEN')
 bot.dagpi = Client(token_get('DAGPI'))
+
+bot.website = token_get('WEBSITE')
+bot.github = token_get('GITHUB')
+
+bot.dblst = token_get('DISCORDBOTLIST')
+bot.discordbotsgg = token_get('DISCORDBOTSGG')
+bot.topken = token_get('TOPGG')
+bot.bfd = token_get('BOTSFORDISCORD')
+bot.botlist = token_get('DISCORDLISTSPACE')
+bot.discordboats = token_get('DISCORDBOATS')
+bot.voidbot = token_get('VOIDBOTS')
+bot.fateslist = token_get('FATESLIST')
+bot.bladebot = token_get('BLADEBOTLIST')
+bot.version = token_get('VERSION')
+
 slash = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)
 
 cog_dir = Path(__file__).resolve(strict=True).parent / join('cogs')
@@ -92,8 +111,6 @@ try:
     division_by_zero = 1 / 0
 except:
     pass
-
-
 
 try:
     bot.run(bot.token)
