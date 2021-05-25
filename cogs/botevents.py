@@ -17,25 +17,25 @@ class BotEvents(commands.Cog):
     
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
-        # try:
-        message = 'The prefix is **m$** ,A full list of all commands is available by typing ```m$help```'
-        e = discord.Embed(
-                color=discord.Color.random(),
-                title=self.bot.description,
-                description = message,
-                timestamp = datetime.datetime.utcnow()
-            )
-        e.set_image(
-                url=random.choice(
-                    open(
-                        self.base_dir / os.path.join('util','images_list.txt'), 'r'
-                        ).readlines()
-                    )
+        try:
+            message = 'The prefix is **m$** ,A full list of all commands is available by typing ```m$help```'
+            e = discord.Embed(
+                    color=discord.Color.random(),
+                    title=self.bot.description,
+                    description = message,
+                    timestamp = datetime.datetime.utcnow()
                 )
-        e.set_thumbnail(url=self.bot.user.avatar_url)
-        e.set_author(name='Hatsune Miku',url=self.bot.website)
-        await guild.system_channel.send(embed=e)
-        # except: pass
+            e.set_image(
+                    url=random.choice(
+                        open(
+                            self.base_dir / os.path.join('util','images_list.txt'), 'r'
+                            ).readlines()
+                        )
+                    )
+            e.set_thumbnail(url=self.bot.user.avatar_url)
+            e.set_author(name='Hatsune Miku',url=self.bot.website)
+            await guild.system_channel.send(embed=e)
+        except: pass
 
         e34= discord.Embed(
             title=f'{guild.name}', 
