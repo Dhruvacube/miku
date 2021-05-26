@@ -37,8 +37,9 @@ class Info(commands.Cog):
         embed.add_field(name="**Total Guilds:**", value=serverCount+1)
         embed.add_field(name="**Total Users:**", value=memberCount)
         embed.add_field(name="**Bot Developer:**", value="[DHRUVA SHAW#0550](https://discord.com/users/571889108046184449/)")
+        embed.add_field(name="**Website:**", value="[Click Here](https://hatsunemikubot.weebly.com/)")
         embed.add_field(name="**More Info:**", value=f"[Click Here](https://statcord.com/bot/{self.bot.discord_id})")
-        # embed.add_field(name="**Incidents/Maintenance Reports:**", value="[Click Here](https://minatonamikaze.statuspage.io/)")
+        embed.add_field(name="**Incidents/Maintenance Reports:**", value="[Click Here](https://hatsunemiku.statuspage.io/)")
 
         embed.set_footer(text=f"{ctx.author} | {self.bot.user.name}")
         embed.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar_url)
