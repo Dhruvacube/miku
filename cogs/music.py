@@ -1,5 +1,7 @@
 import discord
-import DiscordUtils
+try:
+    import DiscordUtils
+except:pass
 from discord.ext import commands
 
 

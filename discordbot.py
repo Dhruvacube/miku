@@ -4,7 +4,9 @@ from os.path import join
 from pathlib import Path
 
 import discord
-import DiscordUtils
+try:
+    import DiscordUtils
+except: pass
 import dotenv
 import sentry_sdk
 from discord.ext import commands
@@ -57,7 +59,7 @@ bot = commands.Bot(
 bot.statcord = token_get('STATCORD')
 bot.discord_id = token_get('DISCORD_CLIENT_ID')
 bot.start_time = time.time()
-bot.music = DiscordUtils.Music()
+# bot.music = DiscordUtils.Music()
 
 bot.token = token_get('TOKEN')
 bot.dagpi = Client(token_get('DAGPI'))
@@ -74,6 +76,8 @@ bot.discordboats = token_get('DISCORDBOATS')
 bot.voidbot = token_get('VOIDBOTS')
 bot.fateslist = token_get('FATESLIST')
 bot.bladebot = token_get('BLADEBOTLIST')
+bot.spacebot = token_get('SPACEBOT')
+
 bot.version = token_get('VERSION')
 
 slash = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)
@@ -86,7 +90,8 @@ for filename in os.listdir(cog_dir):
                 bot.load_extension(f'cogs.{filename.strip(" ")}.{i[:-3]}')
     else:
         if filename.endswith('.py'):
-            bot.load_extension(f'cogs.{filename[:-3]}')
+            if filename != 'music.py':
+                bot.load_extension(f'cogs.{filename[:-3]}')
 
 @bot.event
 async def on_ready():
