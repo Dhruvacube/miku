@@ -16,7 +16,6 @@ Here are some questions which the bot will answer -
 __Category__ !| __Description__ | __Slash Commands Availability__
 ------------ | -----------------|---------------------------------
 **Vocaloid** | Get **kawaii** pic of different **Vocaloids** | :white_check_mark:
-**Music**    | Listen to some **Music** | :x:
 **Waifu**    | Rollout random **waifu** and marry them ! 💍 UwU 💖 | :white_check_mark:
 
 #### ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png) Prefix ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png)
