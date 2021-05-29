@@ -4,7 +4,6 @@ from pathlib import Path
 
 import discord
 import requests
-from dbl import *
 
 
 class PostStats:
@@ -20,10 +19,10 @@ class PostStats:
         filepointer = open(imageslistdir)
         imageslist = filepointer.readlines()
 
-        dblpy = DBLClient(self.bot, self.bot.topken)
-        try:
-            await dblpy.post_guild_count(guildsno)
-        except: pass
+        a = requests.post(f'https://top.gg/api/bots/{self.bot.discord_id}/stats',
+                          headers={'Authorization': self.bot.topken},
+                          data={'server_count': guildsno}
+                        )
         b = requests.post(f'https://discordbotlist.com/api/v1/bots/{self.bot.discord_id}/stats',
                           headers={'Authorization': self.bot.dblst},
                           data={'guilds': guildsno, 'users': members}
@@ -64,6 +63,10 @@ class PostStats:
                           headers={"Authorization": self.bot.bladebot,
                                    "Content-Type": "application/json"},
                           json={"servercount": guildsno})
+        l = requests.post(f'https://api.discordextremelist.xyz/v2/bot/{self.bot.discord_id}/stats',
+                          headers={"Authorization": self.bot.extremelist,
+                                   "Content-Type": "application/json"},
+                          json={"guildCount": guildsno})
 
         r = self.bot.get_channel(844534346815373322)
         e1 = discord.Embed(title='Status posted successfully',
@@ -71,7 +74,7 @@ class PostStats:
         e1.set_image(url=random.choice(imageslist).strip('\n'))
         e1.set_thumbnail(url=self.bot.user.avatar_url)
         e1.add_field(
-            name='TopGG', value=f'200 : [TopGG](https://top.gg/bot/{self.bot.discord_id})')
+            name='TopGG', value=f'{a.status_code} : [TopGG](https://top.gg/bot/{self.bot.discord_id})')
         e1.add_field(name='DiscordBotList', value=str(b.status_code) +
                      ' : [DiscordBotList](https://discord.ly/hatsune-miku)')
         e1.add_field(name='BotsForDiscord', value=str(
@@ -92,4 +95,6 @@ class PostStats:
             j.status_code)+f' : [Fates List](https://fateslist.xyz/minato/)')
         e1.add_field(name='BladeBotList', value=str(
             k.status_code)+f' : [BladeBotList](https://bladebotlist.xyz/bot/{self.bot.discord_id}/)')
+        e1.add_field(name='DiscordExtremeList', value=str(
+            l.status_code)+f' : [DiscordExtremeList](https://discordextremelist.xyz/en-US/bots/{self.bot.discord_id}/)')
         await r.send(embed=e1)

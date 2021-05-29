@@ -4,9 +4,6 @@ from os.path import join
 from pathlib import Path
 
 import discord
-try:
-    import DiscordUtils
-except: pass
 import dotenv
 import sentry_sdk
 from discord.ext import commands
@@ -59,7 +56,6 @@ bot = commands.Bot(
 bot.statcord = token_get('STATCORD')
 bot.discord_id = token_get('DISCORD_CLIENT_ID')
 bot.start_time = time.time()
-# bot.music = DiscordUtils.Music()
 
 bot.token = token_get('TOKEN')
 bot.dagpi = Client(token_get('DAGPI'))
@@ -77,6 +73,7 @@ bot.voidbot = token_get('VOIDBOTS')
 bot.fateslist = token_get('FATESLIST')
 bot.bladebot = token_get('BLADEBOTLIST')
 bot.spacebot = token_get('SPACEBOT')
+bot.extremelist = token_get('DISCORDEXTREMELIST')
 
 bot.version = token_get('VERSION')
 
