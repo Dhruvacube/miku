@@ -5,7 +5,6 @@ from pathlib import Path
 
 import discord
 import dotenv
-import sentry_sdk
 from discord.ext import commands
 from pretty_help import PrettyHelp
 from discord_slash import SlashCommand
@@ -35,7 +34,6 @@ intents = discord.Intents.all()
 intents.reactions = True
 intents.guilds = True
 intents.presences = False
-SENTRY_LINK = token_get('SENTRY_LINK')
 
 #Bot Init
 bot = commands.Bot(
@@ -101,17 +99,6 @@ async def on_ready():
     await posting.PostStats(bot).post_guild_stats_all()
     await stats.send(embed=e)
     await bot.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name='over Miku Expo'))
-
-
-#Sentry Init
-sentry_sdk.init(
-    SENTRY_LINK,
-    traces_sample_rate=1.0
-)
-try:
-    division_by_zero = 1 / 0
-except:
-    pass
 
 try:
     bot.run(bot.token)
