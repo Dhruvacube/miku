@@ -9,7 +9,6 @@ import sentry_sdk
 from discord.ext import commands
 from pretty_help import PrettyHelp
 from discord_slash import SlashCommand
-from asyncdagpi import Client
 
 from cogs.util import post_stats_log as posting
 
@@ -58,7 +57,7 @@ bot.discord_id = token_get('DISCORD_CLIENT_ID')
 bot.start_time = time.time()
 
 bot.token = token_get('TOKEN')
-bot.dagpi = Client(token_get('DAGPI'))
+bot.dagpi = token_get('DAGPI')
 
 bot.website = token_get('WEBSITE')
 bot.github = token_get('GITHUB')

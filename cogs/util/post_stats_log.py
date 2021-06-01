@@ -92,7 +92,7 @@ class PostStats:
         e1.add_field(name='Void Bots', value=str(
             i.status_code)+f' : [Void Bots](https://voidbots.net/bot/{self.bot.discord_id}/)')
         e1.add_field(name='Fates List', value=str(
-            j.status_code)+f' : [Fates List](https://fateslist.xyz/minato/)')
+            j.status_code)+f' : [Fates List](https://fateslist.xyz/hatsune-miku/)')
         e1.add_field(name='BladeBotList', value=str(
             k.status_code)+f' : [BladeBotList](https://bladebotlist.xyz/bot/{self.bot.discord_id}/)')
         e1.add_field(name='DiscordExtremeList', value=str(

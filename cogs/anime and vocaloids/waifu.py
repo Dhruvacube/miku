@@ -3,6 +3,16 @@ import asyncio
 import discord
 from discord.ext import commands
 from discord_slash import SlashContext, cog_ext
+import requests
+
+def waifu_get(token):
+    headers = {
+    'Authorization': token,
+    'Content-Type':'application/json'
+
+    }
+    request_made = requests.get('https://api.dagpi.xyz/data/waifu', headers=headers)
+    return request_made.json()
 
 
 class Waifu(commands.Cog):
@@ -12,7 +22,7 @@ class Waifu(commands.Cog):
         self.description = 'Get waifu ! UwU'
     
     async def get_waifu(self):
-        waifu = await self.bot.dagpi.waifu() 
+        waifu = waifu_get(self.bot.dagpi) 
         pic = waifu['display_picture']
         name = waifu['name']
         likes_rank = waifu['like_rank']
