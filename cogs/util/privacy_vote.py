@@ -19,8 +19,8 @@ class VotingMenu(menus.Menu):
 
     @menus.button('\N{WHITE HEAVY CHECK MARK}')
     async def on_check_mark(self, payload):
-        
-        topgg =  f'\n - **[TopGG](https://top.gg/bot/{self.discord_id})** '
+
+        topgg = f'\n - **[TopGG](https://top.gg/bot/{self.discord_id})** '
         Discordbotlist = f'\n - **[Discordbotlist](https://discordbotlist.com/bots/minato-namikaze)**'
         Discordlist = f'\n - **[Discordlist.Space](https://discordlist.space/bot/{self.discord_id}/upvote)**  '
         BotsForDiscord = f'\n - **[BotsForDiscord](https://botsfordiscord.com/bot/{self.discord_id}/vote)**'
@@ -30,11 +30,11 @@ class VotingMenu(menus.Menu):
         voidbots = f'\n - **[Void Bots](https://voidbots.net/bot/{self.discord_id}/vote)**'
         bladebotlist = f'\n - **[BladeBotList](https://bladebotlist.xyz/bot/{self.discord_id}/vote)**'
         disbot = f'\n - **[DisBot List](https://disbotlist.xyz/bot/{self.discord_id}/vote)**'
-        
+
         e1 = discord.Embed(title="Thanks!",
-            description=f"Thanks {self.ctx.author.mention}! Here's the links:{topgg}{Discordbotlist}{Discordlist}{BotsForDiscord}{Boats}{Space}{fateslist}{voidbots}{bladebotlist}{disbot}",
-            color=discord.Color.random()
-        )
+                           description=f"Thanks {self.ctx.author.mention}! Here's the links:{topgg}{Discordbotlist}{Discordlist}{BotsForDiscord}{Boats}{Space}{fateslist}{voidbots}{bladebotlist}{disbot}",
+                           color=discord.Color.random()
+                           )
         await self.message.edit(content="", embed=e1)
         self.stop()
 
@@ -78,5 +78,6 @@ class MenuSource(menus.ListPageSource):
         super().__init__(data, per_page=1)
 
     async def format_page(self, menu, data):
-        embed = discord.Embed(description="\n".join(item for item in data),color=discord.Color.random())
+        embed = discord.Embed(description="\n".join(
+            item for item in data), color=discord.Color.random())
         return embed

@@ -3,26 +3,32 @@ from pathlib import Path
 from random import choice
 
 import discord
-import requests
+import aiohttp
 
 
 async def meek_api(ctx, name):
-    l = choice(['https://api.meek.moe/', 'https://mikuapi.predeactor.net/random',False]) if name.lower() == 'miku' else 'https://api.meek.moe/'
-    e=discord.Embed(title=name.capitalize(),color=discord.Color.random())
+    session = aiohttp.ClientSession()
+
+    l = choice(['https://api.meek.moe/', 'https://mikuapi.predeactor.net/random',
+               False]) if name.lower() == 'miku' else 'https://api.meek.moe/'
+    e = discord.Embed(title=name.capitalize(), color=discord.Color.random())
     try:
-        if name=='miku' and l:
-            data = requests.get(url = l + name if l=='https://api.meek.moe/' else 'https://mikuapi.predeactor.net/random').json()['url']
+        if name == 'miku' and l:
+            data = await session.get(l + name if l == 'https://api.meek.moe/' else 'https://mikuapi.predeactor.net/random')
         else:
-            data = requests.get(url = l + name).json()['url']
-        e.set_image(url=data)
+            data = await session.get(l + name)
+            url = await data.json()
+        e.set_image(url=url['url'])
     except:
         imageslistdir = Path(__file__).resolve(
-                strict=True).parent / join('images_list.txt')
+            strict=True).parent / join('images_list.txt')
         filepointer = open(imageslistdir)
         imageslist = filepointer.readlines()
         if name == 'miku':
             e.set_image(url=choice(imageslist))
         else:
-            e=discord.Embed(title='Sorry but currently there is some problem!',color=discord.Color.red())
+            e = discord.Embed(
+                title='Sorry but currently there is some problem!', color=discord.Color.red())
             e.set_image(url=choice(imageslist))
+    await session.close()
     return e

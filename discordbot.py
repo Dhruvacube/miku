@@ -24,29 +24,33 @@ def get_prefix(bot, message):
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
+
 dotenv_file = os.path.join(".env")
+
+
 def token_get(tokenname):
     if os.path.isfile(dotenv_file):
         dotenv.load_dotenv(dotenv_file)
     return os.environ.get(tokenname, 'False').strip('\n')
+
 
 intents = discord.Intents.all()
 intents.reactions = True
 intents.guilds = True
 intents.presences = False
 
-#Bot Init
+# Bot Init
 bot = commands.Bot(
     command_prefix=get_prefix,
-    intents=intents, 
-    help_command=PrettyHelp(show_index=True),  
-    
+    intents=intents,
+    help_command=PrettyHelp(show_index=True),
+
     allowed_mentions=discord.AllowedMentions(
-        users=True, 
-        roles=False, 
+        users=True,
+        roles=False,
         everyone=False
     ),
-    
+
     case_insensitive=True,
     description="Hi I am Hatsune Miku. こんにちは、初音ミクです。"
 )
@@ -87,12 +91,14 @@ for filename in os.listdir(cog_dir):
             if filename != 'music.py':
                 bot.load_extension(f'cogs.{filename[:-3]}')
 
+
 @bot.event
 async def on_ready():
     current_time = time.time()
     difference = int(round(current_time - bot.start_time))
     stats = bot.get_channel(844534399500419092)
-    e = discord.Embed(title=f"Bot Loaded!", description=f"Bot ready by **{time.ctime()}**, loaded all cogs perfectly! Time to load is {difference} secs :)", color=discord.Color.random())
+    e = discord.Embed(title=f"Bot Loaded!",
+                      description=f"Bot ready by **{time.ctime()}**, loaded all cogs perfectly! Time to load is {difference} secs :)", color=discord.Color.random())
     e.set_thumbnail(url=bot.user.avatar_url)
     print('Started The Bot')
 
