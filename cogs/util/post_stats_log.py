@@ -10,11 +10,11 @@ class PostStats:
     def __init__(self, bot):
         self.bot = bot
 
-    async def post(url, headers, data: dict = None, json: dict = None):
+    async def post(self,url, headers, data: dict = None, json: dict = None):
         session = aiohttp.ClientSession()
         request_made = await session.post(url, headers=headers, json=data or json)
         await session.close()
-        return await request_made.json()
+        return request_made
 
     async def post_guild_stats_all(self):
         guildsno = len(self.bot.guilds)
@@ -80,27 +80,27 @@ class PostStats:
         e1.set_image(url=random.choice(imageslist).strip('\n'))
         e1.set_thumbnail(url=self.bot.user.avatar_url)
         e1.add_field(
-            name='TopGG', value=f'{a.status_code} : [TopGG](https://top.gg/bot/{self.bot.discord_id})')
-        e1.add_field(name='DiscordBotList', value=str(b.status_code) +
+            name='TopGG', value=f'{a.status} : [TopGG](https://top.gg/bot/{self.bot.discord_id})')
+        e1.add_field(name='DiscordBotList', value=str(b.status) +
                      ' : [DiscordBotList](https://discord.ly/hatsune-miku)')
         e1.add_field(name='BotsForDiscord', value=str(
-            c.status_code)+f' : [BotsForDiscord](https://botsfordiscord.com/bot/{self.bot.discord_id})')
+            c.status)+f' : [BotsForDiscord](https://botsfordiscord.com/bot/{self.bot.discord_id})')
         e1.add_field(name='DiscordListSpace', value=str(
-            d.status_code)+f' : [DiscordListSpace](https://discordlist.space/bot/{self.bot.discord_id})')
+            d.status)+f' : [DiscordListSpace](https://discordlist.space/bot/{self.bot.discord_id})')
         e1.add_field(name='DiscordBoats', value=str(
-            e.status_code)+f' : [DiscordBoats](https://discord.boats/bot/{self.bot.discord_id})')
+            e.status)+f' : [DiscordBoats](https://discord.boats/bot/{self.bot.discord_id})')
         e1.add_field(name='DiscordBots', value=str(
-            f.status_code)+f' : [DiscordBots](https://discord.bots.gg/bots/{self.bot.discord_id}/)')
+            f.status)+f' : [DiscordBots](https://discord.bots.gg/bots/{self.bot.discord_id}/)')
 
         e1.add_field(name='Space Bots', value=str(
-            h.status_code)+f' : [Space Bots](https://space-bot-list.xyz/bots/{self.bot.discord_id})')
+            h.status)+f' : [Space Bots](https://space-bot-list.xyz/bots/{self.bot.discord_id})')
 
         e1.add_field(name='Void Bots', value=str(
-            i.status_code)+f' : [Void Bots](https://voidbots.net/bot/{self.bot.discord_id}/)')
+            i.status)+f' : [Void Bots](https://voidbots.net/bot/{self.bot.discord_id}/)')
         e1.add_field(name='Fates List', value=str(
-            j.status_code)+f' : [Fates List](https://fateslist.xyz/hatsune-miku/)')
+            j.status)+f' : [Fates List](https://fateslist.xyz/hatsune-miku/)')
         e1.add_field(name='BladeBotList', value=str(
-            k.status_code)+f' : [BladeBotList](https://bladebotlist.xyz/bot/{self.bot.discord_id}/)')
+            k.status)+f' : [BladeBotList](https://bladebotlist.xyz/bot/{self.bot.discord_id}/)')
         e1.add_field(name='DiscordExtremeList', value=str(
-            l.status_code)+f' : [DiscordExtremeList](https://discordextremelist.xyz/en-US/bots/{self.bot.discord_id}/)')
+            l.status)+f' : [DiscordExtremeList](https://discordextremelist.xyz/en-US/bots/{self.bot.discord_id}/)')
         await r.send(embed=e1)

@@ -40,8 +40,8 @@ class Info(commands.Cog):
                         value="[DHRUVA SHAW#0550](https://discord.com/users/571889108046184449/)")
         embed.add_field(name="**Website:**",
                         value="[Click Here](https://hatsunemikubot.weebly.com/)")
-        embed.add_field(name="**More Info:**",
-                        value=f"[Click Here](https://statcord.com/bot/{self.bot.discord_id})")
+        # embed.add_field(name="**More Info:**",
+        #                 value=f"[Click Here](https://statcord.com/bot/{self.bot.discord_id})")
         embed.add_field(name="**Incidents/Maintenance Reports:**",
                         value="[Click Here](https://hatsunemiku.statuspage.io/)")
 

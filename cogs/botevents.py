@@ -5,7 +5,6 @@ from pathlib import Path
 
 import discord
 from discord.ext import commands
-from discord.ext.commands import command
 
 from .util import post_stats_log
 
