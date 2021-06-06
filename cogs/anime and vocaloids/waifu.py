@@ -1,9 +1,10 @@
 import asyncio
 
+import aiohttp
 import discord
 from discord.ext import commands
 from discord_slash import SlashContext, cog_ext
-import aiohttp
+from util.var import *
 
 
 async def waifu_get(token):
@@ -21,11 +22,11 @@ async def waifu_get(token):
 class Waifu(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.bot.dagpi = bot.dagpi
+        self.dagpi = dagpi
         self.description = 'Get waifu ! UwU'
 
     async def get_waifu(self):
-        waifu = await waifu_get(self.bot.dagpi)
+        waifu = await waifu_get(self.dagpi)
         pic = waifu['display_picture']
         name = waifu['name']
         likes_rank = waifu['like_rank']

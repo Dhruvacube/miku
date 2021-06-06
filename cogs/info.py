@@ -5,8 +5,9 @@ import time
 import discord
 from discord.ext import commands
 from discord.ext.commands import command
+from util.var import *
 
-from .util.privacy_vote import VotingMenu, WhoMenu
+from util.privacy_vote import VotingMenu, WhoMenu
 
 
 class Info(commands.Cog):
@@ -31,7 +32,7 @@ class Info(commands.Cog):
 
         embed.set_thumbnail(url=self.bot.user.avatar_url)
 
-        embed.add_field(name="**Bot Version:**", value=self.bot.version)
+        embed.add_field(name="**Bot Version:**", value=version)
         embed.add_field(name="**Python Version:**", value=pythonVersion)
         embed.add_field(name="**Discord.Py Version**", value=dpyVersion)
         embed.add_field(name="**Total Guilds:**", value=serverCount+1)
@@ -97,7 +98,7 @@ class Info(commands.Cog):
         """ Displays source code """
         e = discord.Embed(
             title="You didn't provide a command (because you cant), so here's the source!",
-            description=f"[Source]({self.bot.github})",
+            description=f"[Source]({github})",
             color=discord.Color.random()
         )
         await ctx.send(embed=e)

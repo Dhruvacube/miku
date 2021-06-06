@@ -6,14 +6,15 @@ from pathlib import Path
 import discord
 from discord.ext import commands
 
-from .util import post_stats_log
+from util import post_stats_log
+from util.var import *
 
 
 class BotEvents(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.posting = post_stats_log.PostStats(self.bot)
-        self.base_dir = Path(__file__).resolve().parent
+        self.base_dir = Path(__file__).resolve().parent.parent
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
@@ -34,7 +35,7 @@ class BotEvents(commands.Cog):
                 )
             )
             e.set_thumbnail(url=self.bot.user.avatar_url)
-            e.set_author(name='Hatsune Miku', url=self.bot.website)
+            e.set_author(name='Hatsune Miku', url=website)
             await guild.system_channel.send(embed=e)
         except:
             pass

@@ -1,11 +1,10 @@
 from discord.ext import commands
-from ..util import meek_moe
+from util import meek_moe
 
 
 class Vocaloid(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.endpoint = 'https://api.meek.moe/'
         self.description = 'Get some kawai pictures of the vocaloids.'
 
     @commands.command()

@@ -1,11 +1,6 @@
-import inspect
-import io
 import os
 import subprocess as sp
-import textwrap
 import time
-import traceback
-from contextlib import redirect_stdout
 from pathlib import Path
 
 import discord

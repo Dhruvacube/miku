@@ -9,8 +9,6 @@ from discord.ext import commands
 from pretty_help import PrettyHelp
 from discord_slash import SlashCommand
 
-from cogs.util import post_stats_log as posting
-
 
 def get_prefix(bot, message):
     """A callable Prefix for our bot. This could be edited to allow per server prefixes."""
@@ -52,32 +50,10 @@ bot = commands.Bot(
     ),
 
     case_insensitive=True,
+    strip_after_prefix=True,
     description="Hi I am Hatsune Miku. こんにちは、初音ミクです。"
 )
-bot.statcord = token_get('STATCORD')
-bot.discord_id = token_get('DISCORD_CLIENT_ID')
 bot.start_time = time.time()
-
-bot.token = token_get('TOKEN')
-bot.dagpi = token_get('DAGPI')
-
-bot.website = token_get('WEBSITE')
-bot.github = token_get('GITHUB')
-
-bot.dblst = token_get('DISCORDBOTLIST')
-bot.discordbotsgg = token_get('DISCORDBOTSGG')
-bot.topken = token_get('TOPGG')
-bot.bfd = token_get('BOTSFORDISCORD')
-bot.botlist = token_get('DISCORDLISTSPACE')
-bot.discordboats = token_get('DISCORDBOATS')
-bot.voidbot = token_get('VOIDBOTS')
-bot.fateslist = token_get('FATESLIST')
-bot.bladebot = token_get('BLADEBOTLIST')
-bot.spacebot = token_get('SPACEBOT')
-bot.extremelist = token_get('DISCORDEXTREMELIST')
-
-bot.version = token_get('VERSION')
-
 slash = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)
 
 cog_dir = Path(__file__).resolve(strict=True).parent / join('cogs')
@@ -88,8 +64,7 @@ for filename in os.listdir(cog_dir):
                 bot.load_extension(f'cogs.{filename.strip(" ")}.{i[:-3]}')
     else:
         if filename.endswith('.py'):
-            if filename != 'music.py':
-                bot.load_extension(f'cogs.{filename[:-3]}')
+            bot.load_extension(f'cogs.{filename[:-3]}')
 
 
 @bot.event
@@ -101,14 +76,15 @@ async def on_ready():
                       description=f"Bot ready by **{time.ctime()}**, loaded all cogs perfectly! Time to load is {difference} secs :)", color=discord.Color.random())
     e.set_thumbnail(url=bot.user.avatar_url)
     print('Started The Bot')
-
-    await posting.PostStats(bot).post_guild_stats_all()
     await stats.send(embed=e)
     await bot.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name='over Miku Expo'))
 
+
 try:
-    bot.run(bot.token)
-except RuntimeError:
-    bot.logout()
-except KeyboardInterrupt:
-    bot.logout()
+    bot.run(token_get('TOKEN'))
+except discord.PrivilegedIntentsRequired:
+    print(
+        "[Login Failure] You need to enable the server members intent on the Discord Developers Portal."
+    )
+except discord.errors.LoginFailure:
+    print("[Login Failure] The token inserted in config.ini is invalid.")

@@ -1,13 +1,12 @@
 from discord.ext import commands
 from discord_slash import SlashContext, cog_ext
 
-from ..util import meek_moe
+from util import meek_moe
 
 
 class VocaloidSlash(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.endpoint = 'https://api.meek.moe/'
         self.description = 'Get some kawai pictures of the vocaloids.'
 
     @cog_ext.cog_slash(name="rin", description='Rin kawai picture')
