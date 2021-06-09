@@ -7,7 +7,7 @@ import discord
 from discord.ext import commands
 
 from util import post_stats_log
-from util.var import *
+from util.var import website
 
 
 class BotEvents(commands.Cog):

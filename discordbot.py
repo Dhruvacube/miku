@@ -6,9 +6,8 @@ from pathlib import Path
 import discord
 import dotenv
 from discord.ext import commands
-from pretty_help import PrettyHelp
 from discord_slash import SlashCommand
-
+from pretty_help import PrettyHelp
 
 def get_prefix(bot, message):
     """A callable Prefix for our bot. This could be edited to allow per server prefixes."""
@@ -32,7 +31,8 @@ def token_get(tokenname):
     return os.environ.get(tokenname, 'False').strip('\n')
 
 
-intents = discord.Intents.all()
+intents = discord.Intents.default()
+intents.members = True
 intents.reactions = True
 intents.guilds = True
 intents.presences = False
@@ -55,17 +55,10 @@ bot = commands.Bot(
 )
 bot.start_time = time.time()
 slash = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)
-
 cog_dir = Path(__file__).resolve(strict=True).parent / join('cogs')
-for filename in os.listdir(cog_dir):
-    if os.path.isdir(cog_dir / filename) and filename != 'util':
-        for i in os.listdir(cog_dir / filename):
-            if i.endswith('.py'):
-                bot.load_extension(f'cogs.{filename.strip(" ")}.{i[:-3]}')
-    else:
-        if filename.endswith('.py'):
-            bot.load_extension(f'cogs.{filename[:-3]}')
 
+bot.load_extension('cogs.anime and vocaloids.vocaloids_slash')
+bot.load_extension('cogs.anime and vocaloids.waifu')
 
 @bot.event
 async def on_ready():
@@ -75,6 +68,11 @@ async def on_ready():
     e = discord.Embed(title=f"Bot Loaded!",
                       description=f"Bot ready by **{time.ctime()}**, loaded all cogs perfectly! Time to load is {difference} secs :)", color=discord.Color.random())
     e.set_thumbnail(url=bot.user.avatar_url)
+    
+    bot.load_extension('cogs.developer.developer')
+    bot.load_extension('cogs.botevents')
+    bot.load_extension('cogs.info')
+    
     print('Started The Bot')
     await stats.send(embed=e)
     await bot.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name='over Miku Expo'))

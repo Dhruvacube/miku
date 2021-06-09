@@ -5,7 +5,7 @@ import time
 import discord
 from discord.ext import commands
 from discord.ext.commands import command
-from util.var import *
+from util.var import version, github
 
 from util.privacy_vote import VotingMenu, WhoMenu
 

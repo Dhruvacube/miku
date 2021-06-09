@@ -4,7 +4,7 @@ import aiohttp
 import discord
 from discord.ext import commands
 from discord_slash import SlashContext, cog_ext
-from util.var import *
+from util.var import dagpi
 
 
 async def waifu_get(token):

@@ -2,8 +2,8 @@ from os.path import join
 from pathlib import Path
 from random import choice
 
-import discord
 import aiohttp
+import discord
 
 
 async def meek_api(ctx, name):
