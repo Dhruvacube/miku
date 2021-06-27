@@ -8,6 +8,7 @@ import dotenv
 from discord.ext import commands
 from discord_slash import SlashCommand
 from pretty_help import PrettyHelp
+from keep_alive import keep_alive
 
 def get_prefix(bot, message):
     """A callable Prefix for our bot. This could be edited to allow per server prefixes."""
@@ -23,8 +24,6 @@ def get_prefix(bot, message):
 
 
 dotenv_file = os.path.join(".env")
-
-
 def token_get(tokenname):
     if os.path.isfile(dotenv_file):
         dotenv.load_dotenv(dotenv_file)
@@ -77,7 +76,7 @@ async def on_ready():
     await stats.send(embed=e)
     await bot.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name='over Miku Expo'))
 
-
+keep_alive()
 try:
     bot.run(token_get('TOKEN'))
 except discord.PrivilegedIntentsRequired:

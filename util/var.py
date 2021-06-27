@@ -9,6 +9,12 @@ def token_get(tokenname):
         dotenv.load_dotenv(dotenv_file)
     return os.environ.get(tokenname, 'False').strip('\n')
 
+def get_blacklist_servers():
+    with open('blacklistservers.txt') as f:
+        a=f.readlines()
+    remove_new_line = lambda a: int(str(a).strip('\n'))
+    return list(map(remove_new_line, a))
+        
 
 website = token_get('WEBSITE')
 github = token_get('GITHUB')

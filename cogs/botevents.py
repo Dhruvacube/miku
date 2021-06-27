@@ -7,7 +7,7 @@ import discord
 from discord.ext import commands
 
 from util import post_stats_log
-from util.var import website
+from util.var import website, get_blacklist_servers
 
 
 class BotEvents(commands.Cog):
@@ -111,10 +111,11 @@ class BotEvents(commands.Cog):
             e4.set_footer(text=f"{ctx.author.name}")
             await ctx.channel.send(embed=e4, delete_after=2)
         elif isinstance(error, commands.CommandNotFound):
-            e2 = discord.Embed(
-                title="Command Error!", description=f"`{error}`", color=discord.Color.random())
-            e2.set_footer(text=f"{ctx.author.name}")
-            await ctx.channel.send(embed=e2, delete_after=3)
+            if ctx.guild.id not in get_blacklist_servers():
+                e2 = discord.Embed(
+                    title="Command Error!", description=f"`{error}`", color=discord.Color.random())
+                e2.set_footer(text=f"{ctx.author.name}")
+                await ctx.channel.send(embed=e2, delete_after=3)
 
         elif isinstance(error, commands.CommandInvokeError):
             e7 = discord.Embed(title="Oh no, I guess I have not been given proper access! Or some internal error",
