@@ -10,7 +10,7 @@ def token_get(tokenname):
     return os.environ.get(tokenname, 'False').strip('\n')
 
 def get_blacklist_servers():
-    with open('blacklistservers.txt') as f:
+    with open(Path(__file__).resolve().parent/'blacklistservers.txt') as f:
         a=f.readlines()
     remove_new_line = lambda a: int(str(a).strip('\n'))
     return list(map(remove_new_line, a))

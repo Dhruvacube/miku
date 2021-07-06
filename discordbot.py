@@ -71,6 +71,7 @@ async def on_ready():
     bot.load_extension('cogs.developer.developer')
     bot.load_extension('cogs.botevents')
     bot.load_extension('cogs.info')
+    bot.load_extension('cogs.anime and vocaloids.vocaloids')
     
     print('Started The Bot')
     await stats.send(embed=e)
