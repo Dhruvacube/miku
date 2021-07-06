@@ -90,7 +90,7 @@ python-versions = ">=3.5.3"
 
 [[package]]
 name = "discord-pretty-help"
-version = "1.3.1"
+version = "1.3.2"
 description = "And nicer looking interactive help menu for discord.py"
 category = "main"
 optional = false
@@ -260,7 +260,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ec0a7e3a767af43e2de5feee8a755860b069268cd92bf961b6200f8cb4d05e22"
+content-hash = "b24b0a8fa741a6f89daeda797fdfc28895b2a17b5de485b190e1f9416fa469f5"
 
 [metadata.files]
 aiohttp = [
@@ -331,8 +331,8 @@ discord-ext-menus = [
     {file = "discord_ext_menus-1.1-py3-none-any.whl", hash = "sha256:d3c9fc8cacf533ed78fc177482889ae72236f09968184ac90bdfa6a8555b5108"},
 ]
 discord-pretty-help = [
-    {file = "discord-pretty-help-1.3.1.tar.gz", hash = "sha256:0ddf6e8596440080b1ee89e514f9c30119f111601b0690d98fdff87193550b6f"},
-    {file = "discord_pretty_help-1.3.1-py3-none-any.whl", hash = "sha256:244fa62779c16baa57edd59b5a73e5556ca850f7a24abc6a324eefbab1280190"},
+    {file = "discord-pretty-help-1.3.2.tar.gz", hash = "sha256:4dce6840583a7054f7604af888c14584e477256ac203b456faba64cfeca20be5"},
+    {file = "discord_pretty_help-1.3.2-py3-none-any.whl", hash = "sha256:61bc6cf2ddb3ac91773d4678ba18a6f3e28396ff10f1c1c09a62f18411793f14"},
 ]
 discord-py-slash-command = [
     {file = "discord-py-slash-command-2.0.4.tar.gz", hash = "sha256:e58801520f99ebcba7f3221b3b08cbaa79f2bd0089d1ca5ecc30fb5d799ce42f"},
