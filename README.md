@@ -25,7 +25,7 @@ __Category__ !| __Description__ | __Slash Commands Availability__
 
 #### ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png) Important Links ![Hatsune Miku](https://i.imgur.com/F4NwCGK.png)
 
-- [Invite Link](https://hatsunemiku-invitelogs.herokuapp.com/invite?sitename=Direct%20From%20Bot&password=cube12345%3F)
+- ~~Invite Link~~
 - [Website](https://hatsunemikubot.weebly.com/)
 
 ![Hatsune Miku](https://i.imgur.com/x0zBdqo.jpg)
